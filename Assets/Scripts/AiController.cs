@@ -22,9 +22,7 @@ public class AiController : Singleton<AiController>
     private void UpdateClients()
     {
         foreach (AiClient aiClient in clients)
-        {
             aiClient.UpdateClient();
-        }
     }
 
     private IEnumerator Tick(float interval, OnTick onTick)

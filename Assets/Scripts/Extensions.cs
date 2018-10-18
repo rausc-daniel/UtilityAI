@@ -15,14 +15,15 @@ public static class Extensions
 
         for (int i = 0; i < arr.Length; i++)
         {
-            if (arr[i] > highest)
+            float item = arr[i];
+            if (item > highest)
             {
-                highest = arr[i];
+                highest = item;
                 index = i;
                 indices.Clear();
                 indices.Add(i);
             }
-            else if (Math.Abs(arr[i] - highest) < 0.1f)
+            else if (Math.Abs(item - highest) < 0.1f)
             {
                 indices.Add(i);
             }
@@ -60,9 +61,7 @@ public static class Extensions
         List<T> output = new List<T>();
 
         foreach (var item in list)
-        {
             output.Add(item);
-        }
 
         return output;
     }
