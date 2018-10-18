@@ -14,11 +14,11 @@ public class BooleanScorer : Scorer
     {
         score = 0;
         base.Initialize(client);
-        Debug.Log("Test");
         info = MyClient.GetType().GetField(affectingBoolean, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        EventManager.Instance.AddListener<Events.UtilityAi.OnValueChanged>(UpdateBool);
     }
         
-    private void UpdateBool()
+    private void UpdateBool(GameEvent e)
     {
         score = (bool) info.GetValue(MyClient) ? onTrue : onFalse;
     }

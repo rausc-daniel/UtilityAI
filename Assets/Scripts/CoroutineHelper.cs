@@ -11,7 +11,7 @@ public class CoroutineHelper : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-            
+
         activeCoroutines = new Dictionary<string, CoroutineNode>();
     }
 
@@ -41,15 +41,17 @@ public class CoroutineHelper : MonoBehaviour
     {
         CoroutineNode node = new CoroutineNode(coroutine);
         activeCoroutines.Add(name, node);
+
         return node;
     }
 
     private CoroutineNode CreateInstance(IEnumerator coroutine)
     {
         CoroutineNode node = new CoroutineNode(coroutine);
+
         return node;
     }
-    
+
     private void DeleteInstance(CoroutineNode node, string name)
     {
         activeCoroutines.Remove(name);
@@ -60,12 +62,14 @@ public class CoroutineHelper : MonoBehaviour
     {
         CoroutineNode tmp;
         activeCoroutines.TryGetValue(name, out tmp);
+
         return tmp;
     }
 
     private bool CheckIfCoroutineExists(string name)
     {
         CoroutineNode tmp;
+
         return activeCoroutines.TryGetValue(name, out tmp);
     }
 
