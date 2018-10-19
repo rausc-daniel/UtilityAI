@@ -19,6 +19,6 @@ public class Follow : Action
     {
         if(mySeeker.CurrentTarget == null) return;
         mySeeker.Agent.SetDestination(mySeeker.CurrentTarget.transform.position);
-        Debug.Log($"Following: {Scorers[0].Score}");
+        base.Execute();
     }
 }

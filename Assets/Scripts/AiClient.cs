@@ -12,7 +12,7 @@ public class AiClient : MonoBehaviour
 
     private int actionCount;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         AiController.Register(this);
         actionCount = actions.Count;

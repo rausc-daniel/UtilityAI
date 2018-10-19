@@ -18,6 +18,6 @@ public class Action : ScriptableObject
 
     public virtual void Execute()
     {
-        Debug.Log($"{name}: with Score of: {Evaluate()}");
+        Debug.Log($"{MyClient.name}: {name.Substring(1)} with Score of {Evaluate()}");
     }
 }

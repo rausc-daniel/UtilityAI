@@ -21,8 +21,9 @@ public class Seeker : AiClient
 
     private bool hasSpotted;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         Agent = GetComponent<NavMeshAgent>();
         vision = new OverlapSphereVision(this, range, hitLayer);
         EventManager.Instance.AddListener<Events.Senses.SpottingChanged>(
@@ -34,7 +35,6 @@ public class Seeker : AiClient
                     hasSpotted = false;
                 if (CurrentTarget != null)
                     hasSpotted = true;
-                Debug.Log(hasSpotted);
                 EventManager.Instance.TriggerEvent(new Events.UtilityAi.OnValueChanged());
             });
         CoroutineHelper.Instance.RunCoroutine(HandleVision(), "SeekerVision");

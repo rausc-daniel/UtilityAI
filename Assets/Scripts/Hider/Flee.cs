@@ -3,6 +3,14 @@
 [CreateAssetMenu(fileName = "NewFlee", menuName = "Actions/Flee")]
 class Flee : Action
 {
+    private Hider myHider;
+    
+    public override void Initialize(AiClient client)
+    {
+        myHider = (Hider) client;
+        base.Initialize(client);
+    }
+
     public override float Evaluate()
     {
         return Scorers[0].Score;
@@ -10,6 +18,7 @@ class Flee : Action
 
     public override void Execute()
     {
-        Debug.Log($"Fleeing: {Scorers[0].Score}");
+        myHider.Agent.SetDestination(-myHider.Follower.transform.position);
+        base.Execute();
     }
 }

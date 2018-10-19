@@ -19,6 +19,7 @@ public class Walk : Action
 
     public override void Execute()
     {
+        if(target == null) return;
         myHider.Agent.SetDestination(target.transform.position);
         base.Execute();
     }

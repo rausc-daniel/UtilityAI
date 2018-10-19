@@ -4,7 +4,7 @@ using System.Collections;
 
 public class AiController : Singleton<AiController>
 {
-    private static List<AiClient> clients;
+    public static List<AiClient> clients;
 
     protected override void Awake()
     {
@@ -30,6 +30,7 @@ public class AiController : Singleton<AiController>
         float progress = 0;
         while (true)
         {
+            Debug.Log(clients.Count);
             progress += Time.deltaTime;
             if (progress > interval)
             {
