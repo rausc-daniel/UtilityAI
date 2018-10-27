@@ -11,6 +11,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8f9c8b2d20d8f43aee1db7dede4d8f, type: 3}
   m_Name: aPatrol
   m_EditorClassIdentifier: 
-  Name: Patrol
-  Scorers:
-  - {fileID: 11400000, guid: 9c6857fdb78afe94890c544f6cf5092a, type: 2}
+  evalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

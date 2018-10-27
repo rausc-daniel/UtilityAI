@@ -11,7 +11,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce9edb348d442c9bf546de75e2e6b57, type: 3}
   m_Name: aWalk
   m_EditorClassIdentifier: 
-  Name: 
-  Scorers:
-  - {fileID: 11400000, guid: abfbe8a7858cee8448556ddde1d9b3e5, type: 2}
-  target: {fileID: 0}
+  evalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
