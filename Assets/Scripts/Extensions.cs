@@ -65,4 +65,7 @@ public static class Extensions
 
         return output;
     }
+
+    public static Vector3 Abs(this Vector3 vec) =>
+        new Vector3(Mathf.Abs(vec.x), Mathf.Abs(vec.y), Mathf.Abs(vec.z));
 }

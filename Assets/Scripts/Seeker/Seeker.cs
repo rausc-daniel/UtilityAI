@@ -37,7 +37,7 @@ public class Seeker : AiClient
                     hasSpotted = true;
                 EventManager.Instance.TriggerEvent(new Events.UtilityAi.OnValueChanged());
             });
-        CoroutineHelper.Instance.RunCoroutine(HandleVision(), "SeekerVision");
+        CoroutineHelper.Instance.RunCoroutine(HandleVision(), $"{name}-Vision");
     }
 
 

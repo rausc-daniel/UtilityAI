@@ -18,6 +18,7 @@ class Flee : Action
 
     public override void Execute()
     {
+        myHider.Agent.speed = 6;
         myHider.Agent.SetDestination(-myHider.Follower.transform.position);
         base.Execute();
     }

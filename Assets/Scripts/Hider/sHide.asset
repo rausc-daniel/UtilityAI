@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f3497b54680fe44b328c4517ea791c, type: 3}
-  m_Name: sInvestigate
+  m_Name: sHide
   m_EditorClassIdentifier: 
-  score: -64
-  Id: 1
+  score: -37
+  Id: 0
   startScore: 98
-  step: 2
-  resetAction: Follow
+  step: 3
+  resetAction: Flee

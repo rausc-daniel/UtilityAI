@@ -3,12 +3,13 @@
 [CreateAssetMenu(fileName = "NewWalk", menuName = "Actions/Walk")]
 public class Walk : Action
 {
-    [SerializeField] private GameObject target;
     private Hider myHider;
+    private Vector3 target = default(Vector3);
 
     public override void Initialize(AiClient client)
     {
         myHider = (Hider) client;
+        target = myHider.Target.transform.position;
         base.Initialize(client);
     }
 
@@ -19,8 +20,9 @@ public class Walk : Action
 
     public override void Execute()
     {
-        if(target == null) return;
-        myHider.Agent.SetDestination(target.transform.position);
+        if(target == default(Vector3)) return;
+        myHider.Agent.speed = 3;
+        myHider.Agent.SetDestination(target);
         base.Execute();
     }
 }

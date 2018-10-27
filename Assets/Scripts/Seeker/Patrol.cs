@@ -17,6 +17,4 @@ public class Patrol : Action
         seeker.Agent.SetDestination(currentTarget);
         base.Execute();
     }
-
-
 }

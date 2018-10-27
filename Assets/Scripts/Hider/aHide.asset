@@ -8,11 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51f3497b54680fe44b328c4517ea791c, type: 3}
-  m_Name: sInvestigate
+  m_Script: {fileID: 11500000, guid: 7f99ce71fb049034ab15e844991512cc, type: 3}
+  m_Name: aHide
   m_EditorClassIdentifier: 
-  score: -64
-  Id: 1
-  startScore: 98
-  step: 2
-  resetAction: Follow
+  Name: Hide
+  Scorers:
+  - {fileID: 11400000, guid: 0bbc0cf45471515479f0d564f20db382, type: 2}

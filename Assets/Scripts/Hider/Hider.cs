@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class Hider : AiClient
 {
+    public PathNode Target;
     public NavMeshAgent Agent;
     private bool hasBeenSpotted;
     public AiClient Follower;
+    public Vector3 hidingTarget;
     
     protected override void Awake()
     {
@@ -23,9 +25,15 @@ public class Hider : AiClient
             else
             {
                 hasBeenSpotted = false;
-                Follower = null;
+                // Follower = null;
             }
             EventManager.Instance.TriggerEvent(new Events.UtilityAi.OnValueChanged());
         });
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(hidingTarget != default(Vector3))
+            Gizmos.DrawWireSphere(hidingTarget, 1);
     }
 }

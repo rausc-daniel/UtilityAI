@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using EventSystem;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "NewPatrol", menuName = "Actions/Investigate")]
 public class Investigate : Action
 {
     [SerializeField] private float radius;
-    [SerializeField] private float timeout;
 
     private Seeker mySeeker;
     private Square investigatingSquare = default(Square);
@@ -34,6 +35,8 @@ public class Investigate : Action
                         HigherZ = mySeeker.transform.position.z + radius,
                         LowerZ = mySeeker.transform.position.z - radius
                     };
+
+                MyClient.StartCoroutine(Timer());
             });
     }
 
@@ -49,22 +52,28 @@ public class Investigate : Action
 
     public override void Execute()
     {
-        if (Vector3.Distance(mySeeker.transform.position, currentTarget) < 0.5f || currentTarget == default(Vector3))
+        if (Vector3.Distance(mySeeker.transform.position, currentTarget) < 0.01f || currentTarget == default(Vector3))
         {
-            mySeeker.Agent.SetDestination(new Vector3(
+            currentTarget = new Vector3(
                 Random.Range(investigatingSquare.LowerX, investigatingSquare.HigherX), 0,
-                Random.Range(investigatingSquare.LowerZ, investigatingSquare.HigherZ)));
+                Random.Range(investigatingSquare.LowerZ, investigatingSquare.HigherZ));
             mySeeker.Agent.SetDestination(currentTarget);
-            MyClient.StartCoroutine(Timer());
         }
 
+        Debug.DrawLine(new Vector3(investigatingSquare.LowerX, 0.1f ,investigatingSquare.LowerZ), new Vector3(investigatingSquare.HigherX, 0.1f ,investigatingSquare.HigherZ));
+        Debug.DrawLine(new Vector3(investigatingSquare.LowerX, 0.1f ,investigatingSquare.HigherZ), new Vector3(investigatingSquare.HigherX, 0.1f ,investigatingSquare.LowerZ));
+        
         base.Execute();
     }
 
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(timeout);
+        while (true)
+        {
+            if (Math.Abs(Scorers[0].Score % 10) < 5)
+                currentTarget = default(Vector3);
 
-        currentTarget = default(Vector3);
+            yield return null;
+        }
     }
 }
