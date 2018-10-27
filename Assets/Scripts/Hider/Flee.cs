@@ -5,15 +5,10 @@ class Flee : Action
 {
     private Hider myHider;
     
-    public override void Initialize(AiClient client)
+    public override unsafe void Initialize(AiClient client, float* animEval)
     {
         myHider = (Hider) client;
-        base.Initialize(client);
-    }
-
-    public override float Evaluate()
-    {
-        return Scorers[0].Score;
+        base.Initialize(client, animEval);
     }
 
     public override void Execute()

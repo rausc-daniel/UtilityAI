@@ -9,7 +9,7 @@ class Hide : Action
     private Vector3 hidingSpot;
     private Vector3 seekerPos;
 
-    public override void Initialize(AiClient client)
+    public override unsafe void Initialize(AiClient client, float* animEval)
     {
         obstacles = Physics.OverlapSphere(client.transform.position, int.MaxValue, 1 << 13);
         myHider = (Hider)client;
@@ -20,16 +20,9 @@ class Hide : Action
                 HideBehindObstacle(FindClosest(myHider.transform.position));
             else if (Events.UtilityAi.OnActionChanged.Origin.Equals(myHider) &&
                      Events.UtilityAi.OnActionChanged.Action.GetType() != GetType())
-                myHider.hidingTarget = default(Vector3);
+                myHider.HidingTarget = default(Vector3);
         });
-        base.Initialize(client);
-    }
-
-    public override float Evaluate()
-    {
-        DecliningScorer scorer = (DecliningScorer)Scorers[0];
-        scorer.DeclineScore();
-        return Scorers[0].Score;
+        base.Initialize(client, animEval);
     }
 
     private void HideBehindObstacle(Collider col)
@@ -43,7 +36,7 @@ class Hide : Action
         col.bounds.IntersectRay(ray, out dist);
         hidingSpot = col.transform.position + (-hidingDirection * (dist + 0.5f));
         myHider.Agent.SetDestination(hidingSpot);
-        myHider.hidingTarget = hidingSpot;
+        myHider.HidingTarget = hidingSpot;
     }
 
     public override void Execute()

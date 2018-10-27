@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class AiClient : MonoBehaviour
 {
-    [SerializeField] private List<Action> actions;
-    private readonly List<Scorer> scorers = new List<Scorer>();
+    [SerializeField] protected List<Action> Actions;
     private Action currentAction;
     private Action pastAction;
 
@@ -15,11 +14,11 @@ public class AiClient : MonoBehaviour
     protected virtual void Awake()
     {
         AiController.Register(this);
-        actionCount = actions.Count;
+        actionCount = Actions.Count;
         InitializeClient();
     }
 
-    public void UpdateClient()
+    public virtual void UpdateClient()
     {
         if(actionCount <= 0) return;
         currentAction = EvaluateActions();
@@ -35,29 +34,20 @@ public class AiClient : MonoBehaviour
     {
         float[] scores = new float[actionCount];
 
-        for (int index = 0; index < actions.Count; index++)
+        for (int index = 0; index < Actions.Count; index++)
         {
-            scores[index] = actions[index].Evaluate();
+            scores[index] = Actions[index].Evaluate();
 
             if (scores[index] == -1)
             {
                 Debug.LogWarning($"The action at index {index} is not defined");
             }
         }
-        return actions[scores.GetHighestIndex()];
+        return Actions[scores.GetHighestIndex()];
     }
 
-    private void InitializeClient()
+    public virtual void InitializeClient()
     {
-        foreach (Action action in actions)
-        {
-            action.Initialize(this);
-            foreach (Scorer scorer in action.Scorers)
-            {
-                scorer.Initialize(this);
-                if(scorers.Contains(scorer)) continue;
-                scorers.Add(scorer);
-            }
-        }
+        throw new NotImplementedException();
     }
 }

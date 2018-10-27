@@ -48,14 +48,14 @@ public class AiController : Singleton<AiController>
 
             if (progress > interval)
             {
-                sw.Start();
+                //sw.Start();
                 onTick();
-                sw.Stop();
-                totalTime += sw.ElapsedMilliseconds;
-                totalCycles++;
-                timePerCycle = totalTime / totalCycles;
-                sw.Reset();
-                progress = 0;
+                //sw.Stop();
+                //totalTime += sw.ElapsedMilliseconds;
+                //totalCycles++;
+                //timePerCycle = totalTime / totalCycles;
+                //sw.Reset();
+                //progress = 0;
             }
 
             yield return null;

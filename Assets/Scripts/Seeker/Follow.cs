@@ -7,13 +7,11 @@ public class Follow : Action
 {
     private Seeker mySeeker;
     
-    public override void Initialize(AiClient client)
+    public override unsafe void Initialize(AiClient client, float* animEval)
     {
-        base.Initialize(client);
+        base.Initialize(client, animEval);
         mySeeker = (Seeker) MyClient;
     }
-
-    public override float Evaluate() => Scorers[0].Score;
 
     public override void Execute()
     {

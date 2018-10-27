@@ -7,9 +7,11 @@ public class Hider : AiClient
 {
     public PathNode Target;
     public NavMeshAgent Agent;
-    private bool hasBeenSpotted;
     public AiClient Follower;
-    public Vector3 hidingTarget;
+    private float fleeEval;
+    private float hideEval = 1f;
+    private float walkEval = 1f;
+    public Vector3 HidingTarget;
     
     protected override void Awake()
     {
@@ -19,21 +21,38 @@ public class Hider : AiClient
         {
             if (Events.Senses.SpottingChanged.Target != null && Events.Senses.SpottingChanged.Target.Equals(gameObject))
             {
-                hasBeenSpotted = true;
+                fleeEval = 1;
                 Follower = Events.Senses.SpottingChanged.Client;
             }
             else
             {
-                hasBeenSpotted = false;
-                // Follower = null;
+                fleeEval = 0;
+                hideEval = 0f;
             }
             EventManager.Instance.TriggerEvent(new Events.UtilityAi.OnValueChanged());
         });
     }
 
+    public override void UpdateClient()
+    {
+        hideEval += Time.deltaTime;
+        base.UpdateClient();
+    }
+
+    public override unsafe void InitializeClient()
+    {
+        fixed (float* p1 = &fleeEval)
+            Actions[0].Initialize(this, p1);
+        fixed (float* p2 = &hideEval)
+            Actions[1].Initialize(this, p2);
+        fixed (float* p3 = &walkEval)
+            Actions[2].Initialize(this, p3);
+        
+    }
+
     private void OnDrawGizmos()
     {
-        if(hidingTarget != default(Vector3))
-            Gizmos.DrawWireSphere(hidingTarget, 1);
+        if(HidingTarget != default(Vector3))
+            Gizmos.DrawWireSphere(HidingTarget, 1);
     }
 }

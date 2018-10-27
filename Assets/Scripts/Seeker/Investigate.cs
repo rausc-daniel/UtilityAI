@@ -13,9 +13,9 @@ public class Investigate : Action
     private Square investigatingSquare = default(Square);
     private Vector3 currentTarget = default(Vector3);
 
-    public override void Initialize(AiClient client)
+    public override unsafe void Initialize(AiClient client, float* animEval)
     {
-        base.Initialize(client);
+        base.Initialize(client, animEval);
         mySeeker = (Seeker) MyClient;
         EventManager.Instance.AddListener<Events.UtilityAi.OnActionChanged>(
             e =>
@@ -40,16 +40,6 @@ public class Investigate : Action
             });
     }
 
-    public override float Evaluate()
-    {
-        float score = Scorers[0].Score;
-
-        DecliningScorer scorer = (DecliningScorer) Scorers[0];
-        scorer.DeclineScore();
-
-        return score;
-    }
-
     public override void Execute()
     {
         if (Vector3.Distance(mySeeker.transform.position, currentTarget) < 0.01f || currentTarget == default(Vector3))
@@ -70,7 +60,7 @@ public class Investigate : Action
     {
         while (true)
         {
-            if (Math.Abs(Scorers[0].Score % 10) < 5)
+            if (Math.Abs(Evaluate() % 10) < 5)
                 currentTarget = default(Vector3);
 
             yield return null;

@@ -6,8 +6,6 @@ public class Patrol : Action
     private Seeker seeker;
     private Vector3 currentTarget = default(Vector3);
 
-    public override float Evaluate() => Scorers[0].Score;
-
     public override void Execute()
     {
         if (seeker == null) seeker = (Seeker) MyClient;

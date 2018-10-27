@@ -19,7 +19,9 @@ public class Seeker : AiClient
     private List<Collider> hitTargets = new List<Collider>();
     private List<Collider> prevHitTargets = new List<Collider>();
 
-    private bool hasSpotted;
+    private float followEval;
+    private float investigateEval = 1f;
+    private float patrolEval = 1f;
 
     protected override void Awake()
     {
@@ -32,14 +34,33 @@ public class Seeker : AiClient
                 if (Events.Senses.SpottingChanged.Client.Equals(this))
                     CurrentTarget = Events.Senses.SpottingChanged.Target;
                 if (CurrentTarget == null)
-                    hasSpotted = false;
+                {
+                    followEval = 0;
+                    investigateEval = 0f;
+                }
                 if (CurrentTarget != null)
-                    hasSpotted = true;
+                    followEval = 1;
                 EventManager.Instance.TriggerEvent(new Events.UtilityAi.OnValueChanged());
             });
         CoroutineHelper.Instance.RunCoroutine(HandleVision(), $"{name}-Vision");
     }
 
+    public override unsafe void InitializeClient()
+    {
+        fixed (float* p1 = &followEval)
+            Actions[0].Initialize(this, p1);
+        fixed (float* p2 = &investigateEval)
+            Actions[1].Initialize(this, p2);
+        fixed (float* p3 = &patrolEval)
+            Actions[2].Initialize(this, p3);
+        
+    }
+
+    public override void UpdateClient()
+    {
+        investigateEval += Time.deltaTime;
+        base.UpdateClient();
+    }
 
     private void OnDrawGizmosSelected()
     {
