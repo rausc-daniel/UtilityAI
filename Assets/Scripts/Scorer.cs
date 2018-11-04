@@ -3,12 +3,21 @@ using UnityEngine;
 
 public class Scorer : ScriptableObject
 {
+    // Influence
     [SerializeField] protected float score;
 
-    public float Score => score;
-    public int Id;
+    public float Score
+    {
+        get { return score; }
+    }
 
-    protected AiClient MyClient = null;
 
-    public virtual void Initialize(AiClient client) => MyClient = client;
+    // Owner
+    protected AiClient MyClient;
+
+    // Constructor
+    public virtual void Initialize(AiClient client)
+    {
+        MyClient = client;
+    }
 }
