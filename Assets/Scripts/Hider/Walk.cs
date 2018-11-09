@@ -21,7 +21,7 @@ public class Walk : Action
     public override void Execute()
     {
         if(target == default(Vector3)) return;
-        myHider.Agent.speed = 3;
+        myHider.Agent.speed = 2;
         myHider.Agent.SetDestination(target);
         base.Execute();
     }
