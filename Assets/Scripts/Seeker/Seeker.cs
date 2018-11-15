@@ -53,7 +53,6 @@ public class Seeker : AiClient
             Actions[1].Initialize(this, p2);
         fixed (float* p3 = &patrolEval)
             Actions[2].Initialize(this, p3);
-        
     }
 
     public override void UpdateClient()
