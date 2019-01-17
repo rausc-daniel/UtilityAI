@@ -10,10 +10,10 @@ namespace EventSystem
             
             public class OnActionChanged : GameEvent
             {
-                public static Action Action;
+                public static Utility Action;
                 public static AiClient Origin;
 
-                public OnActionChanged(AiClient origin, Action action)
+                public OnActionChanged(AiClient origin, Utility action)
                 {
                     Origin = origin;
                     Action = action;
