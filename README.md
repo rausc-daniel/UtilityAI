@@ -4,4 +4,4 @@ A little proof of concept showing how utility theory for artificial intelligence
 
 ## Known Bugs
 
-* Uses `ScriptableObject` to implement scores so having two actors of the same type causes only one of them to work properly and the other one doing nothing
+* Uses `ScriptableObject` to implement scores, so having two actors of the same type causes only one of them to work properly and the other one ot do nothing
